@@ -1,0 +1,23 @@
+body {
+    text-align: center;
+    align-items: center;
+    background-color:rgb(197, 197, 197);
+    color: black;
+}
+
+h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+button {
+    border-style: solid black;
+    background-color: grey;
+}
+
+button .hover {
+    border-style: solid grey;
+    background-color: black;
+    color:grey;
+}

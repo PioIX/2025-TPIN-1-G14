@@ -26,13 +26,15 @@ class UserInterface {
         return document.getElementById("fullName").value;
     }
 
+    getId() {
+        return document.getElementById("id").value;
+    }
     /**
      * Modifica el nombre de usuario logueado presentado en pantalla.
      * @param {String} username Nombre del usuario logueado.
-     */
     setUser(username) {
         document.getElementById("loggedUsername").textContent = `¡Bienvenido ${username}!`;
-    }
+    }*/
 
     /**
      * Vacía el contenido de los inputs del login / registro.
