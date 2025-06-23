@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Qué vino primero?</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -13,19 +16,33 @@
         <h1>¿Qué vino primero?</h1>
     </header>
     <main>
+        <!--hamburger menu logo
+        <div class="container" onclick="myFunction(this)"> 
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        -->
         <section id="section1">
-            <h3>Inicio sesión</h3>
-            <h4>Usuario</h4>
-            <input type="text" placeholder="Nombre de usuario" id="username">
-            <h4>DNI</h4>
-            <input type="text" placeholder="Dni" id="id">
-            <h4>Contraseña</h4>
-            <input type="number" placeholder="Contraseña numerica" id="password">
-            <button onclick="logIn()">Iniciar</button>
-            <h3>¿No tenes cuenta? Registrate!</h3>
-            <h4>Nombre y Apellido </h4>
-            <input type="text" placeholder="Escriba aqui..." id="fullName">
-            <button onclick="register()">Registrarse</button>
+            <div class="up">
+                <h3>Inicio sesión</h3>
+                <h4>Usuario</h4>
+                <input type="text" placeholder="Nombre de usuario" id="username">
+                <h4>DNI</h4>
+                <input type="number" placeholder="Dni" id="id" min="1" max="">
+                <h4>Contraseña</h4>
+                <input type="number" placeholder="Contraseña numerica" id="password">
+                <button onclick="logIn()">Iniciar</button>
+            </div>
+            <div class="down">
+                <h3>¿No tenes cuenta? Registrate!</h3>
+                <h4>Nombre</h4>
+                <input type="text" placeholder="Escriba aqui..." id="name">
+                <h4>Apellido</h4>
+                <input type="text" placeholder="Escriba aqui..." id="lastName">
+                <button onclick="register()">Registrarse</button>
+            </div>
+
         </section>
     </main>
 </body>

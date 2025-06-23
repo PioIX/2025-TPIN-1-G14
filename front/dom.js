@@ -22,9 +22,17 @@ class UserInterface {
      * Obtiene el texto ingresado en el input "Nombre y apellido", sección "Login".
      * @returns String que contiene el nombre y apellido ingresados por el usuario.
      */
-    getFullName() {
-        return document.getElementById("fullName").value;
+    getName() {
+        return document.getElementById("name").value;
     }
+     /**
+     * Obtiene el texto ingresado en el input "Nombre y apellido", sección "Login".
+     * @returns String que contiene el nombre y apellido ingresados por el usuario.
+     */
+    getLastName() {
+        return document.getElementById("lastName").value;
+    }
+
 
     getId() {
         return document.getElementById("id").value;
@@ -40,28 +48,14 @@ class UserInterface {
      * Vacía el contenido de los inputs del login / registro.
      */
     clearLoginInputs() {
-        document.getElementById("fullName").value = "";
+        document.getElementById("lastName").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("id").value = "";
         document.getElementById("password").value = "";
         document.getElementById("username").value = "";
     }
 
-    /**
-     * Si se está mostrando la pantalla de login la oculta y muestra la de notas. Y viceversa.
-     */
-    changeScreen() {
-        const notepad = document.getElementById("notepad");
-        const loginForm = document.getElementById("loginForm");
-        if (notepad.style.display !== "none") {
-            notepad.style.display = "none";
-            loginForm.style.display = "";
-            this.clearAllNotes();
-            this.clearSelect();
-        }
-        else {
-            notepad.style.display = "";
-            loginForm.style.display = "none";
-        }
-    }
+    
    
     /**
      * Muestra el modal y le inserta los textos que se reciben como parámetros.
