@@ -42,3 +42,11 @@ app.get('/CompararEstrenos', async function (req, res) {
         res.send(error)
     }
 });
+
+app.post('/insertarUsuarios', async function (req, res) {
+    console.log(req.body)
+    await realizarQuery(`INSERT INTO Usuarios (usuario, id_usuario, contraseña, nombre, apellido)
+VALUES ('${req.body.usuario}', '${req.body.id_usuario}', '${req.body.contraseña}', '${req.body.nombre}', ${req.body.apellido})`)
+    res.send({res:"ok"})
+})
+
