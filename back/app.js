@@ -7,18 +7,18 @@ var app = express(); //Inicializo express
 var port = process.env.PORT || 4000; //Ejecuto el servidor en el puerto 3000
 
 // Convierte una petición recibida (POST-GET...) a objeto JSON
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
     res.status(200).send({
         message: 'GET Home route working fine!'
     });
 });
 
 //Pongo el servidor a escuchar
-app.listen(port, function(){
+app.listen(port, function () {
     console.log(`Server running in http://localhost:${port}`);
 });
 
@@ -37,7 +37,7 @@ app.get('/CompararEstrenos', async function (req, res) {
         ORDER BY RAND()
         LIMIT 1;`)
         res.send(respuesta)
-        }
+    }
     catch (error) {
         res.send(error)
     }
@@ -47,6 +47,6 @@ app.post('/insertarUsuarios', async function (req, res) {
     console.log(req.body)
     await realizarQuery(`INSERT INTO Usuarios (usuario, id_usuario, contraseña, nombre, apellido)
 VALUES ('${req.body.usuario}', '${req.body.id_usuario}', '${req.body.contraseña}', '${req.body.nombre}', ${req.body.apellido})`)
-    res.send({res:"ok"})
+    res.send({ res: "ok" })
 })
 
