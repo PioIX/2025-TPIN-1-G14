@@ -86,9 +86,4 @@ app.post('/verificarUsuario2', async function (req, res) { //me parfece lo mismo
         res.send({ res: "Usuario, contraseña o ID incorrecto" })
     }
 })
-        }
-    catch (error) {
-        res.send(error)
-    }
-});
-
+    
