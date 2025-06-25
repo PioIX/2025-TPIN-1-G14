@@ -8,11 +8,12 @@ function myFunction(x) {
 
 async function fetchCheckNewUser(user, name, lastName, Password, id) { /* @igna hace una appi para cada uno de los 
     parametros que tengo que aca que se fije si existen en la base 
-    de datos ---> si no los encuentra que devuelva 1 y si los encuentra que devuelva 0*/
-
+    de datos ---> si no los encuentra que devuelva 1 y si los encuentra que devuelva 0*/ 
+    
+    // COMO TE DIJKE POR WPP LO HICE CON EL DE ANAJO
 }
 
-async function register() { // @igna tenes que hacer el appi de agregar un usuario a la bd
+async function register() { // @igna tenes que hacer el appi de agregar un usuario a la bd  //FUNCION POST HECHA UWU SE LLAMA /insertarUsuarios
 
     let user = ui.getUser()
     let name = ui.getName()
@@ -20,14 +21,13 @@ async function register() { // @igna tenes que hacer el appi de agregar un usuar
     let password = ui.getPassword()
     let id = ui.getId()
 
-    if (await fetchCheckNewUser() == 1) { //aca va la funcion post app que tenes que hacer @igna pasado por parametro el user, fullName (nombre y apellido juntos), password, y el id que es el dni
-
+    if (await fetchCheckNewUser() == 1) {
         users.push(new User(name, lastName, password, user, id))
 
     }    
 }
 
-function obtenerDatos() {
+/* function obtenerDatos() { LOLO SI QUERES ESTO SACLO YO ENTENDI Q QUERTIAS Q HAGA EL FETCH YA HICE TODOS LOS PEDIDOS HTTP QIE ME PEDISTE EN EL BACK
     let datos = {
         user: ui.getUser(),
         id: ui.getId(),
@@ -53,13 +53,13 @@ async function envioPost(datos) {
     } catch (error) {
         res.send(error)
     }
-}
+} */
 
 async function fetchCheckUser(id, user, password) {
 
     await fetch //aca va la funcion post app que tenes que hacer @igna pasado por parametro el user, password, y el id que es el dni para verificar que exista el usuario y que sea correcto
 }
-async function logIn() { //necesito un appi que verifique que exista este usuario con este password @igna
+async function logIn() { //necesito un appi que verifique que exista este usuario con este password @igna SE LLAMA /VERIFICARUSUARIO
 
     let id = ui.getId()
     let user = ui.getUser()
