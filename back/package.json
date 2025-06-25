@@ -2,10 +2,10 @@
   "name": "ejemplo-node",
   "version": "1.0.0",
   "description": "explicacion fetch",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "pio": "nodemon --env-file=.pio.env index.js",
-    "home": "nodemon --env-file=.home.env index.js"
+    "pio": "nodemon --env-file=.pio.env app.js",
+    "home": "nodemon --env-file=.home.env app.js"
   },
   "author": "Martin Rivas",
   "license": "ISC",
