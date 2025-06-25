@@ -72,6 +72,7 @@ async function logIn() { //necesito un appi que verifique que exista este usuari
 
     if (await fetchCheckUser(id, user, password)) {
         idLogged = id
+        
     }
 
 }
