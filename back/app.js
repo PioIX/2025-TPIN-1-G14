@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
     res.status(200).send({
         message: 'GET Home route working fine!'
     });
@@ -20,7 +20,7 @@ app.get('/', function(req, res){
 
 //Pongo el servidor a escuchar
 
-app.listen(port, function(){
+app.listen(port, function () {
     console.log(`Server running in http://localhost:${port}`);
 });
 
@@ -46,34 +46,22 @@ app.get('/CompararEstrenos', async function (req, res) {
 });
 
 
-app.post('/insertarUsuarios', async function (req, res) {
+app.post('/insertarUsuarios', async function (req, res) {//api para el register
     console.log(req.body)
+    try {
+        const comprobar = await realizarQuery(`SELECT * FROM Usuarios WHERE usuario = '${req.body.usuario}' OR id_usuario = ${req.body.id_usuario}`)
+        if (comprobar.length > 0) {
+            res.send({ res : 2})
+            return
+        } await realizarQuery(`INSERT INTO Usuarios (usuario, id_usuario, contraseña, nombre, apellido)
+    VALUES ('${req.body.usuario}', ${req.body.id_usuario}, '${req.body.contraseña}', '${req.body.nombre}', '${req.body.apellido}')`)
+        res.send({ res: 1 })
+    } catch (error) {
 
-    const comprobar = await realizarQuery(`SELECT * FROM Usuarios WHERE usuario = '${req.body.usuario}' OR id_usuario = ${req.body.id_usuario}`)
-    if (comprobar.length > 0) {
-        res.send("Ya existe un usuario con ese ID o Nombre de usuario")
-        return
-    } await realizarQuery(`INSERT INTO Usuarios (usuario, id_usuario, contraseña, nombre, apellido)
-VALUES ('${req.body.usuario}', ${req.body.id_usuario}, '${req.body.contraseña}', '${req.body.nombre}', '${req.body.apellido}')`)
-    res.send({ res: "Usuario agregado con exito" })
-
-})
-
-app.post('/verificarUsuario', async function (req, res) {
-    console.log(req.body)
-
-    const resultado = await realizarQuery(`
-        SELECT * FROM Usuarios WHERE id_usuario = ${req.body.id_usuario} AND contraseña = '${req.body.contraseña}'
-    `)
-
-    if (resultado.length > 0) {
-        res.send({ res: "Usuario verificado correctamente" })
-    } else {
-        res.send({ res: "Usuario o contraseña incorrecta" })
     }
 })
 
-app.post('/verificarUsuario2', async function (req, res) { //me parfece lo mismo q lo anterior pero solo q agrega user EN MI HUMILDE OPION
+app.post('/verificarUser', async function (req, res) { //api para el logIn
     console.log(req.body)
 
     const resultado = await realizarQuery(`
@@ -81,9 +69,9 @@ app.post('/verificarUsuario2', async function (req, res) { //me parfece lo mismo
     `)
 
     if (resultado.length > 0) {
-        res.send({ res: "Usuario verificado correctamente" })
+        res.send({ res: 1 })
     } else {
-        res.send({ res: "Usuario, contraseña o ID incorrecto" })
+        res.send({ res: 2 })
     }
+
 })
-    

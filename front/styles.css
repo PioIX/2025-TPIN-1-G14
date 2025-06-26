@@ -18,14 +18,30 @@ button {
     background-color: grey;
 }
 
-button .hover {
+button:hover {
     border-style: solid grey;
     background-color: black;
     color: grey;
 }
 
+button {
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+.section1 {
+    display:flex;
+}
+
 .down {
     padding-top: 3%;
+    margin-bottom: 1rem;
+}
+
+input {
+    height: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
 }
 
 /*hamburger menu logo
