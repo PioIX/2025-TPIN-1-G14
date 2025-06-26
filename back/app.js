@@ -48,34 +48,18 @@ app.get('/CompararEstrenos', async function (req, res) {
 
 app.post('/insertarUsuarios', async function (req, res) {//api para el register
     console.log(req.body)
-
     try {
         const comprobar = await realizarQuery(`SELECT * FROM Usuarios WHERE usuario = '${req.body.usuario}' OR id_usuario = ${req.body.id_usuario}`)
         if (comprobar.length > 0) {
-            res.send({res:2})
+            res.send({ res : 2})
             return
         } await realizarQuery(`INSERT INTO Usuarios (usuario, id_usuario, contraseña, nombre, apellido)
-         VALUES ('${req.body.usuario}', ${req.body.id_usuario}, '${req.body.contraseña}', '${req.body.nombre}', '${req.body.apellido}')`)
-        res.send({res:1})
+    VALUES ('${req.body.usuario}', ${req.body.id_usuario}, '${req.body.contraseña}', '${req.body.nombre}', '${req.body.apellido}')`)
+        res.send({ res: 1 })
     } catch (error) {
-        res.send(error)
-    }
 
+    }
 })
-
-/*app.post('/verificarUsuario', async function (req, res) {
-    console.log(req.body)
-
-    const resultado = await realizarQuery(`
-        SELECT * FROM Usuarios WHERE id_usuario = ${req.body.id_usuario} AND contraseña = '${req.body.contraseña}'
-    `)
-
-    if (resultado.length > 0) {
-        res.send({ res: "Usuario verificado correctamente" })
-    } else {
-        res.send({ res: "Usuario o contraseña incorrecta" })
-    }
-})*/
 
 app.post('/verificarUser', async function (req, res) { //api para el logIn
     console.log(req.body)
@@ -89,4 +73,5 @@ app.post('/verificarUser', async function (req, res) { //api para el logIn
     } else {
         res.send({ res: 2 })
     }
+
 })
