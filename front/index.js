@@ -1,17 +1,17 @@
 //hola no se que hcaer xd lol
 idLogged = 0
 
-/*hamburger menu logo*/
+/*hamburger menu logo
 function myFunction(x) {
     x.classList.toggle("change");
 }
-
-async function fetchCheckNewUser(user, name, lastName, Password, id) { /* @igna hace una appi para cada uno de los 
+async function fetchCheckNewUser(user, name, lastName, Password, id) {  @igna hace una appi para cada uno de los 
     parametros que tengo que aca que se fije si existen en la base 
-    de datos ---> si no los encuentra que devuelva 1 y si los encuentra que devuelva 0*/
+    de datos ---> si no los encuentra que devuelva 1 y si los encuentra que devuelva 0
 
     // COMO TE DIJKE POR WPP LO HICE CON EL DE ANAJO
-}
+}*/
+
 
 /*async function register() { // @igna tenes que hacer el appi de agregar un usuario a la bd  //FUNCION POST HECHA UWU SE LLAMA /insertarUsuarios
   x.classList.toggle("change");
