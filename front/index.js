@@ -8,8 +8,8 @@ function myFunction(x) {
 
 async function fetchCheckNewUser(user, name, lastName, Password, id) { /* @igna hace una appi para cada uno de los 
     parametros que tengo que aca que se fije si existen en la base 
-    de datos ---> si no los encuentra que devuelva 1 y si los encuentra que devuelva 0*/ 
-    
+    de datos ---> si no los encuentra que devuelva 1 y si los encuentra que devuelva 0*/
+
     // COMO TE DIJKE POR WPP LO HICE CON EL DE ANAJO
 }
 
@@ -28,10 +28,10 @@ async function register() { // @igna tenes que hacer el appi de agregar un usuar
     if (await fetchCheckNewUser() == 1) {
         users.push(new User(name, lastName, password, user, id))
 
-    }    
+    }
 }
 
-/* function obtenerDatos() { LOLO SI QUERES ESTO SACLO YO ENTENDI Q QUERTIAS Q HAGA EL FETCH YA HICE TODOS LOS PEDIDOS HTTP QIE ME PEDISTE EN EL BACK
+/*function obtenerDatos() { //LOLO SI QUERES ESTO SACLO YO ENTENDI Q QUERTIAS Q HAGA EL FETCH YA HICE TODOS LOS PEDIDOS HTTP QIE ME PEDISTE EN EL BACK
     let datos = {
         user: ui.getUser(),
         id: ui.getId(),
@@ -42,9 +42,9 @@ async function register() { // @igna tenes que hacer el appi de agregar un usuar
 
     console.log("Datos a enviar:", datos)
     return datos
-}
+}*/
 
-async function envioPost(datos) {
+/*async function envioPost(datos) {
     try {
         let resultado = await fetch('http://localhost:4000/insertarUsuarios', {
             method: "POST",
@@ -57,30 +57,51 @@ async function envioPost(datos) {
     } catch (error) {
         res.send(error)
     }
-} */
+} 
 
 async function fetchCheckUser(id, user, password) {
 
     await fetch //aca va la funcion post app que tenes que hacer @igna pasado por parametro el user, password, y el id que es el dni para verificar que exista el usuario y que sea correcto
-}
+}*/
 
-async function logIn() { //necesito un appi que verifique que exista este usuario con este password @igna
-    
-    let id = ui.getId()
-    let user = ui.getUser()
-    let password = ui.getPassword()
-
-    if (await fetchCheckUser(id, user, password)) {
-        idLogged = id
-        
+async function logInFetch() {
+    let datos = {
+        id: ui.getId(),
+        user: ui.getUser(),
+        password : ui.getPassword()
     }
 
+    try {
+        let resultado = await fetch('http://localhost:4000/verificarUser', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos)
+        })
+
+        let response = await resultado.json();
+        console.log("Respuesta del servidor:", response)
+    }
+    catch (error) {
+        console.log(error)
+    }
+
+    /*if (resultado == ) {
+        idLogged = id
+
+    }*/
+
 }
 
-function logOut(){
+
+function logIn(){
+    let respuesta = logInFetch()
+    console.log(respuesta)
+}
+
+function logOut() {
 
     idLogged = 0
     location.href = "./index.html"
-    
+
 
 }
