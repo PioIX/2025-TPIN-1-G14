@@ -49,13 +49,17 @@ app.get('/CompararEstrenos', async function (req, res) {
 app.post('/insertarUsuarios', async function (req, res) {//api para el register
     console.log(req.body)
 
-    const comprobar = await realizarQuery(`SELECT * FROM Usuarios WHERE usuario = '${req.body.usuario}' OR id_usuario = ${req.body.id_usuario}`)
-    if (comprobar.length > 0) {
-        res.send("Ya existe un usuario con ese ID o Nombre de usuario")
-        return
-    } await realizarQuery(`INSERT INTO Usuarios (usuario, id_usuario, contraseña, nombre, apellido)
-        VALUES ('${req.body.usuario}', ${req.body.id_usuario}, '${req.body.contraseña}', '${req.body.nombre}', '${req.body.apellido}')`)
-    res.send({ res: "Usuario agregado con exito" })
+    try {
+        const comprobar = await realizarQuery(`SELECT * FROM Usuarios WHERE usuario = '${req.body.usuario}' OR id_usuario = ${req.body.id_usuario}`)
+        if (comprobar.length > 0) {
+            res.send({res:2})
+            return
+        } await realizarQuery(`INSERT INTO Usuarios (usuario, id_usuario, contraseña, nombre, apellido)
+         VALUES ('${req.body.usuario}', ${req.body.id_usuario}, '${req.body.contraseña}', '${req.body.nombre}', '${req.body.apellido}')`)
+        res.send({res:1})
+    } catch (error) {
+        res.send(error)
+    }
 
 })
 
@@ -81,8 +85,8 @@ app.post('/verificarUser', async function (req, res) { //api para el logIn
     `)
 
     if (resultado.length > 0) {
-        res.send({ res: "Usuario verificado correctamente" })
+        res.send({ res: 1 })
     } else {
-        res.send({ res: "Usuario, contraseña o ID incorrecto" })
+        res.send({ res: 2 })
     }
 })

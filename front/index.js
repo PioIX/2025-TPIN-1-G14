@@ -17,16 +17,38 @@ async function fetchCheckNewUser(user, name, lastName, Password, id) {  @igna ha
   x.classList.toggle("change");
 }*/
 
-async function register() { // @igna tenes que hacer el appi de agregar un usuario a la bd
+async function registerFetch() { // @igna tenes que hacer el appi de agregar un usuario a la bd
 
-    let user = ui.getUser()
-    let name = ui.getName()
-    let lastName = ui.getLastName()
-    let password = ui.getPassword()
-    let id = ui.getId()
+    let datos = {
+        user: ui.getUser(),
+        id: ui.getId(),
+        password: ui.getPassword(),
+        name: ui.getName(),
+        lastName: ui.getLastName()
+    }
 
-    if (await fetchCheckNewUser() == 1) {
-        users.push(new User(name, lastName, password, user, id))
+    try {
+        let resultado = await fetch('http://localhost:4000/insertarUsuarios', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos)
+        })
+
+        let response = await resultado.json();
+        console.log(response)
+    } catch (error) {
+        res.send(error)
+    }
+
+}
+
+async function register(){
+    let respuesta = await registerFetch();
+    if (respuesta == 1) {
+        idLogged = ui.getId()
+        //let user = ui.getUser()
+        ui.clearLoginInputs()
+        location.href = "./index2.html"
 
     }
 }
@@ -64,12 +86,15 @@ async function fetchCheckUser(id, user, password) {
     await fetch //aca va la funcion post app que tenes que hacer @igna pasado por parametro el user, password, y el id que es el dni para verificar que exista el usuario y que sea correcto
 }*/
 
+//LISTO FUNCIONA NADIE TOQUE NADA PLS
 async function logInFetch() {
+
     let datos = {
-        id: ui.getId(),
-        user: ui.getUser(),
-        password : ui.getPassword()
+        usuario: ui.getUser(),
+        contraseña: ui.getPassword(),
+        id_usuario: ui.getId()
     }
+
 
     try {
         let resultado = await fetch('http://localhost:4000/verificarUser', {
@@ -79,24 +104,28 @@ async function logInFetch() {
         })
 
         let response = await resultado.json();
-        console.log("Respuesta del servidor:", response)
+        console.log(response);
+        return response.res  // <-- devolvés la respuesta acá
+
+    } catch (error) {
+        console.error("Error en fetch:", error);
+        return null;
     }
-    catch (error) {
-        console.log(error)
-    }
-
-    /*if (resultado == ) {
-        idLogged = id
-
-    }*/
-
 }
 
 
-function logIn(){
-    let respuesta = logInFetch()
-    console.log(respuesta)
+
+async function logIn() {
+    let respuesta = await logInFetch();
+    if (respuesta == 1) {
+        idLogged = ui.getId()
+        //let user = ui.getUser()
+        ui.clearLoginInputs()
+        location.href = "./index2.html"
+
+    }
 }
+
 
 function logOut() {
 
