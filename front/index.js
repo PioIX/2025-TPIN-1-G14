@@ -28,7 +28,7 @@ async function registerFetch() { // @igna tenes que hacer el appi de agregar un 
 
         let response = await resultado.json();
         console.log(response.res)
-        return(response.res)
+        return (response.res)
     } catch (error) {
         res.send(error)
     }
@@ -82,14 +82,19 @@ async function logIn() {
         idLogged = ui.getId()
         //let user = ui.getUser()
         ui.clearLoginInputs()
-        location.href = "./index2.html"
+        if (idLogged == 3) {
+            location.href = "./indexAdmin.html"
+        } else {
+            location.href = "./index2.html"
+        }
+
 
     }
 }
 
 //log out para el hamburger menu
 function logOut() {
-    
+
     idLogged = 0
     location.href = "./index.html"
 

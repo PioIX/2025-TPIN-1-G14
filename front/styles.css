@@ -44,6 +44,15 @@ input {
     border-radius: 0.5rem;
 }
 
+#section6{
+    padding:1rem;
+    display:flex;
+    justify-content: space-around;
+}
+
+.boton{
+    padding:1rem;
+}
 /*hamburger menu logo
 .container {
     align-items: right;
