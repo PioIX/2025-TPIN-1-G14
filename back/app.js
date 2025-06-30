@@ -75,3 +75,35 @@ app.post('/verificarUser', async function (req, res) { //api para el logIn
     }
 
 })
+
+app.delete('/borrarUser', async function (req, res) {
+    console.log(req.body)
+    await realizarQuery(`DELETE FROM Usuarios WHERE id_usuario = ${req.body.id_usuario}`)
+    res.send({res:"ok"})
+})
+
+app.delete('/borrarPelicula', async function (req, res) {
+    console.log(req.body)
+    await realizarQuery(`DELETE FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
+    res.send({res:"ok"})
+})
+
+app.delete('/borrarPelicula', async function (req, res) {
+    console.log(req.body)
+    await realizarQuery(`DELETE FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
+    res.send({res:"ok"})
+})
+
+app.post('/insertarPeliculas', async function (req, res) {
+    console.log(req.body)
+
+    const comprobar = await realizarQuery(`SELECT * FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
+    if (comprobar.length > 0) {
+        res.send("Ya existe una pelicula con ese ID")
+        return
+    }
+
+    await realizarQuery(`INSERT INTO Peliculas (id_pelicula, nombre_pelicula, fecha_estreno, nombre_imagen)
+    VALUES (${req.body.id_pelicula}, '${req.body.nombre_pelicula}', '${req.body.fecha_estreno}', '${req.body.nombre_imagen}')`)
+    res.send({res:"ok"})
+})
