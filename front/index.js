@@ -1,50 +1,24 @@
 //hola no se que hcaer xd lol
 idLogged = 0
 
-/*hamburger menu logo*/
+/*hamburger menu logo
 function myFunction(x) {
     x.classList.toggle("change");
-}
-
-async function fetchCheckNewUser(user, name, lastName, Password, id) { /* @igna hace una appi para cada uno de los 
-    parametros que tengo que aca que se fije si existen en la base 
-    de datos ---> si no los encuentra que devuelva 1 y si los encuentra que devuelva 0*/ 
-    
-    // COMO TE DIJKE POR WPP LO HICE CON EL DE ANAJO
-}
-
-/*async function register() { // @igna tenes que hacer el appi de agregar un usuario a la bd  //FUNCION POST HECHA UWU SE LLAMA /insertarUsuarios
-  x.classList.toggle("change");
 }*/
 
-async function register() { // @igna tenes que hacer el appi de agregar un usuario a la bd
+//LISTO EL REGISTER NADIE LO TOQUEE PLS
 
-    let user = ui.getUser()
-    let name = ui.getName()
-    let lastName = ui.getLastName()
-    let password = ui.getPassword()
-    let id = ui.getId()
+//register
+async function registerFetch() { // @igna tenes que hacer el appi de agregar un usuario a la bd
 
-    if (await fetchCheckNewUser() == 1) {
-        users.push(new User(name, lastName, password, user, id))
-
-    }    
-}
-
-/* function obtenerDatos() { LOLO SI QUERES ESTO SACLO YO ENTENDI Q QUERTIAS Q HAGA EL FETCH YA HICE TODOS LOS PEDIDOS HTTP QIE ME PEDISTE EN EL BACK
     let datos = {
-        user: ui.getUser(),
-        id: ui.getId(),
-        password: ui.getPassword(),
-        name: ui.getName(),
-        lastName: ui.getLastName(),
+        usuario: ui.getUser(),
+        id_usuario: ui.getId(),
+        contraseña: ui.getPassword(),
+        nombre: ui.getName(),
+        apellido: ui.getLastName()
     }
 
-    console.log("Datos a enviar:", datos)
-    return datos
-}
-
-async function envioPost(datos) {
     try {
         let resultado = await fetch('http://localhost:4000/insertarUsuarios', {
             method: "POST",
@@ -53,33 +27,70 @@ async function envioPost(datos) {
         })
 
         let response = await resultado.json();
-        console.log("Respuesta del servidor:", response)
+        console.log(response.res)
+        return(response.res)
     } catch (error) {
         res.send(error)
     }
-} */
 
-async function fetchCheckUser(id, user, password) {
-
-    await fetch //aca va la funcion post app que tenes que hacer @igna pasado por parametro el user, password, y el id que es el dni para verificar que exista el usuario y que sea correcto
 }
 
-async function logIn() { //necesito un appi que verifique que exista este usuario con este password @igna
-    
-    let id = ui.getId()
-    let user = ui.getUser()
-    let password = ui.getPassword()
+async function register() {
+    let respuesta = await registerFetch();
+    if (respuesta == 1) {
+        idLogged = ui.getId()
+        //let user = ui.getUser()
+        ui.clearLoginInputs()
+        location.href = "./index2.html"
 
-    if (await fetchCheckUser(id, user, password)) {
-        idLogged = id
+    }
+}
+
+
+//LISTO FUNCIONA NADIE TOQUE NADA PLS
+
+//log in
+async function logInFetch() {
+
+    let datos = {
+        usuario: ui.getUser(),
+        contraseña: ui.getPassword(),
+        id_usuario: ui.getId()
     }
 
+
+    try {
+        let resultado = await fetch('http://localhost:4000/verificarUser', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos)
+        })
+
+        let response = await resultado.json();
+        console.log(response);
+        return response.res  // <-- devolvés la respuesta acá
+
+    } catch (error) {
+        console.error("Error en fetch:", error);
+        return null;
+    }
 }
 
-function logOut(){
+async function logIn() {
+    let respuesta = await logInFetch();
+    if (respuesta == 1) {
+        idLogged = ui.getId()
+        //let user = ui.getUser()
+        ui.clearLoginInputs()
+        location.href = "./index2.html"
 
+    }
+}
+
+//log out para el hamburger menu
+function logOut() {
+    
     idLogged = 0
     location.href = "./index.html"
-    
 
 }
