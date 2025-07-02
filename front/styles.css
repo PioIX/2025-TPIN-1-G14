@@ -11,6 +11,7 @@ h1 {
     font-weight: 400;
     font-style: normal;
     font-size: 3rem;
+    margin-bottom:0px;
 }
 
 button {
@@ -52,6 +53,10 @@ input {
 
 .boton{
     padding:1rem;
+}
+
+#botonJuego{
+    margin:0px;
 }
 /*hamburger menu logo
 .container {
