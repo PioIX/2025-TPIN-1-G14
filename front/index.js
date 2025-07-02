@@ -111,7 +111,7 @@ async function fetchEliminarPelicula() {
     let resultado = await fetch('http://localhost:4000/borrarPelicula', {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(id)
+        body: JSON.stringify({id:id})
     })
     try {
         let response = await resultado.json();

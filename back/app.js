@@ -84,7 +84,7 @@ app.delete('/borrarUser', async function (req, res) {
 
 app.delete('/borrarPelicula', async function (req, res) {
     console.log(req.body)
-    await realizarQuery(`DELETE FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
+    await realizarQuery(`DELETE FROM Peliculas WHERE id_pelicula = ${req.body.id}`)
     res.send({res:"ok"})
 })
 
