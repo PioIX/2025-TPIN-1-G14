@@ -28,7 +28,7 @@ async function registerFetch() { // @igna tenes que hacer el appi de agregar un 
 
         let response = await resultado.json();
         console.log(response.res)
-        return(response.res)
+        return (response.res)
     } catch (error) {
         res.send(error)
     }
@@ -82,15 +82,42 @@ async function logIn() {
         idLogged = ui.getId()
         //let user = ui.getUser()
         ui.clearLoginInputs()
-        location.href = "./index2.html"
+        if (idLogged == 3) {
+            location.href = "./indexAdmin.html"
+        } else {
+            location.href = "./index2.html"
+        }
+
 
     }
 }
 
 //log out para el hamburger menu
 function logOut() {
-    
+
     idLogged = 0
     location.href = "./index.html"
+
+}
+
+//funciones admin
+
+async function fetchEliminarPelicula() {
+
+    let resultado = await fetch('http://localhost:4000/eliminar', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datos)
+    })
+    try {
+
+        let response = await resultado.json();
+        console.log(response);
+        return response.res  // <-- devolvés la respuesta acá
+
+    } catch (error) {
+        console.error("Error en fetch:", error);
+        return null;
+    }
 
 }

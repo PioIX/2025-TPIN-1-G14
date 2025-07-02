@@ -25,10 +25,10 @@ class UserInterface {
     getName() {
         return document.getElementById("name").value;
     }
-     /**
-     * Obtiene el texto ingresado en el input "Nombre y apellido", sección "Login".
-     * @returns String que contiene el nombre y apellido ingresados por el usuario.
-     */
+    /**
+    * Obtiene el texto ingresado en el input "Nombre y apellido", sección "Login".
+    * @returns String que contiene el nombre y apellido ingresados por el usuario.
+    */
     getLastName() {
         return document.getElementById("lastName").value;
     }
@@ -43,6 +43,30 @@ class UserInterface {
     setUser(username) {
         document.getElementById("loggedUsername").textContent = `¡Bienvenido ${username}!`;
     }*/
+    //IndexAdmin
+    getTitulo() {
+        return document.getElementById("titulo").value;
+    }
+
+    getIdPelicula() {
+        return document.getElementById("id_pelicula").value;
+    }
+
+    getLink() {
+        return document.getElementById("link").value;
+    }
+
+    getFecha() {
+        return document.getElementById("fecha").value;
+    }
+
+    getIdUsuario() {
+        return document.getElementById("idUsuario").value;
+    }
+    
+    getIdPeliculaBorrar() {
+        return document.getElementById("idPelicula").value
+    }
 
     /**
      * Vacía el contenido de los inputs del login / registro.
@@ -55,8 +79,8 @@ class UserInterface {
         document.getElementById("username").value = "";
     }
 
-    
-   
+
+
     /**
      * Muestra el modal y le inserta los textos que se reciben como parámetros.
      * @param {String} title Título que se quiere mostrar en el modal.
