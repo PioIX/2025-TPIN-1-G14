@@ -88,12 +88,6 @@ app.delete('/borrarPelicula', async function (req, res) {
     res.send({res:"ok"})
 })
 
-app.delete('/borrarPelicula', async function (req, res) {
-    console.log(req.body)
-    await realizarQuery(`DELETE FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
-    res.send({res:"ok"})
-})
-
 app.post('/insertarPeliculas', async function (req, res) {
     console.log(req.body)
 

@@ -102,15 +102,18 @@ function logOut() {
 
 //funciones admin
 
+
+//borrar peliculas
 async function fetchEliminarPelicula() {
 
-    let resultado = await fetch('http://localhost:4000/eliminar', {
-        method: "POST",
+    let id = Number(ui.getIdPeliculaBorrar())
+
+    let resultado = await fetch('http://localhost:4000/borrarPelicula', {
+        method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(datos)
+        body: JSON.stringify(id)
     })
     try {
-
         let response = await resultado.json();
         console.log(response);
         return response.res  // <-- devolvés la respuesta acá
@@ -120,4 +123,13 @@ async function fetchEliminarPelicula() {
         return null;
     }
 
+}
+
+async function eliminarPelicula() {
+    let response = fetchEliminarPelicula()
+
+    if (response.res == "ok"){
+        console.log("La pelicula se elimino correctamente")
+        ui.clearInputs()
+    }
 }
