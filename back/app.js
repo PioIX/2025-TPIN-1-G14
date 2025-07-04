@@ -51,7 +51,7 @@ app.post('/insertarUsuarios', async function (req, res) {//api para el register
     try {
         const comprobar = await realizarQuery(`SELECT * FROM Usuarios WHERE usuario = '${req.body.usuario}' OR id_usuario = ${req.body.id_usuario}`)
         if (comprobar.length > 0) {
-            res.send({ res : 2})
+            res.send({ res: 2 })
             return
         } await realizarQuery(`INSERT INTO Usuarios (usuario, id_usuario, contraseña, nombre, apellido)
     VALUES ('${req.body.usuario}', ${req.body.id_usuario}, '${req.body.contraseña}', '${req.body.nombre}', '${req.body.apellido}')`)
@@ -79,25 +79,30 @@ app.post('/verificarUser', async function (req, res) { //api para el logIn
 app.delete('/borrarUser', async function (req, res) {
     console.log(req.body)
     await realizarQuery(`DELETE FROM Usuarios WHERE id_usuario = ${req.body.id_usuario}`)
-    res.send({res:"ok"})
+    res.send({ res: 1 })
 })
 
 app.delete('/borrarPelicula', async function (req, res) {
     console.log(req.body)
     await realizarQuery(`DELETE FROM Peliculas WHERE id_pelicula = ${req.body.id}`)
-    res.send({res:"ok"})
+    res.send({ res: 1 })
 })
 
 app.post('/insertarPeliculas', async function (req, res) {
-    console.log(req.body)
+   try {
+     console.log(req.body)
+     const comprobar = await realizarQuery(`SELECT * FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
+     if (comprobar.length > 0) {
+         res.send({res: 2 })
+         return
+     } else {
+         await realizarQuery(`INSERT INTO Peliculas (id_pelicula, nombre_pelicula, fecha_estreno, nombre_imagen)
+     VALUES (${req.body.id_pelicula}, '${req.body.nombre_pelicula}', '${req.body.fecha_estreno}', '${req.body.nombre_imagen}')`)
+         res.send({ res: 1 })
+     }
+ 
+   } catch (error) {
+        res.send(error)
+   }
 
-    const comprobar = await realizarQuery(`SELECT * FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
-    if (comprobar.length > 0) {
-        res.send("Ya existe una pelicula con ese ID")
-        return
-    }
-
-    await realizarQuery(`INSERT INTO Peliculas (id_pelicula, nombre_pelicula, fecha_estreno, nombre_imagen)
-    VALUES (${req.body.id_pelicula}, '${req.body.nombre_pelicula}', '${req.body.fecha_estreno}', '${req.body.nombre_imagen}')`)
-    res.send({res:"ok"})
 })

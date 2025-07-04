@@ -104,6 +104,9 @@ function logOut() {
 
 
 //borrar peliculas
+
+//LISTO FUNCIONA NO TOCAR
+
 async function fetchEliminarPelicula() {
 
     let id = Number(ui.getIdPeliculaBorrar())
@@ -111,7 +114,7 @@ async function fetchEliminarPelicula() {
     let resultado = await fetch('http://localhost:4000/borrarPelicula', {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({id:id})
+        body: JSON.stringify({ id: id })
     })
     try {
         let response = await resultado.json();
@@ -128,8 +131,36 @@ async function fetchEliminarPelicula() {
 async function eliminarPelicula() {
     let response = fetchEliminarPelicula()
 
-    if (response.res == "ok"){
+    if (response.res == "ok") {
         console.log("La pelicula se elimino correctamente")
         ui.clearInputs()
     }
+}
+
+//agregar pelicula
+
+async function fetchAgregarPelicula() {
+
+    let datos = {
+        nombre_pelicula: ui.getTitulo(),
+        fecha_estreno: ui.getFecha(),
+        nombre_imagen: ui.getLink(),
+        id_pelicula: ui.getIdPelicula()
+    }
+    let resultado = await fetch('http://localhost:4000/insertarPeliculas', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datos)
+    })
+    try {
+        let response = await resultado.json();
+        console.log(response.res);
+        return response.res  // <-- devolvés la respuesta acá
+
+    } catch (error) {
+        console.error("Error en fetch:", error);
+        return null;
+    }
+
+
 }
