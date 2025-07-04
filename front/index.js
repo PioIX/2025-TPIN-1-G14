@@ -129,9 +129,10 @@ async function fetchEliminarPelicula() {
 }
 
 async function eliminarPelicula() {
+
     let response = fetchEliminarPelicula()
 
-    if (response.res == "ok") {
+    if (response.res == "1") {
         console.log("La pelicula se elimino correctamente")
         ui.clearInputs()
     }
@@ -162,5 +163,16 @@ async function fetchAgregarPelicula() {
         return null;
     }
 
+
+}
+
+async function agregarPelicula(){
+    
+    let response = fetchAgregarPelicula();
+
+    if (response.res == "1") {
+        console.log("La pelicula se agregó correctamente")
+        ui.clearInputs()
+    }
 
 }
