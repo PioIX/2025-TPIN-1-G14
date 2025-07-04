@@ -79,7 +79,14 @@ class UserInterface {
         document.getElementById("username").value = "";
     }
 
-
+    clearInputs() {
+        document.getElementById("id_pelicula").value = "";
+        document.getElementById("idPelicula").value = "";
+        document.getElementById("titulo").value = "";
+        document.getElementById("idUsuario").value = "";
+        document.getElementById("fecha").value = "";
+        document.getElementById("link").value = "";
+    }
 
     /**
      * Muestra el modal y le inserta los textos que se reciben como parámetros.
