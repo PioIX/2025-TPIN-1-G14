@@ -77,9 +77,13 @@ app.post('/verificarUser', async function (req, res) { //api para el logIn
 })
 
 app.delete('/borrarUser', async function (req, res) {
-    console.log(req.body)
-    await realizarQuery(`DELETE FROM Usuarios WHERE id_usuario = ${req.body.id_usuario}`)
-    res.send({ res: 1 })
+    try {
+        console.log(req.body)
+        await realizarQuery(`DELETE FROM Usuarios WHERE id_usuario = ${req.body.id_usuario}`)
+        res.send({ res: 1 })
+    } catch (error) {
+        res.send(error)
+    }
 })
 
 app.delete('/borrarPelicula', async function (req, res) {

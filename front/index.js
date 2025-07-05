@@ -129,9 +129,10 @@ async function fetchEliminarPelicula() {
 }
 
 async function eliminarPelicula() {
+
     let response = fetchEliminarPelicula()
 
-    if (response.res == "ok") {
+    if (response.res == 1) {
         console.log("La pelicula se elimino correctamente")
         ui.clearInputs()
     }
@@ -139,6 +140,7 @@ async function eliminarPelicula() {
 
 //agregar pelicula
 
+//LISTO FUNCIONA 
 async function fetchAgregarPelicula() {
 
     let datos = {
@@ -163,4 +165,48 @@ async function fetchAgregarPelicula() {
     }
 
 
+}
+
+async function agregarPelicula(){
+
+    let response = fetchAgregarPelicula();
+
+    if (response.res == "1") {
+        console.log("La pelicula se agregó correctamente")
+        ui.clearInputs()
+    }
+
+}
+
+//borrar usuario
+
+async function fetchEliminarUsuario() {
+
+    let id_usuario = Number(ui.getIdUsuario())
+    
+    let resultado = await fetch('http://localhost:4000/borrarUser', {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id_usuario: id_usuario })
+    })
+    try {
+        let response = await resultado.json();
+        console.log(response);
+        return response.res  // <-- devolvés la respuesta acá
+
+    } catch (error) {
+        console.error("Error en fetch:", error);
+        return null;
+    }
+
+}
+
+async function eliminarUser() {
+
+    let response = fetchEliminarUsuario()
+
+    if (response.res == 1) {
+        console.log("Ek usuario se elimino correctamente")
+        ui.clearInputs()
+    }
 }
