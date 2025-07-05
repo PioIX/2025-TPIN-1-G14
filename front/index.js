@@ -182,12 +182,12 @@ async function agregarPelicula(){
 
 async function fetchEliminarUsuario() {
 
-    let id = Number(ui.getIdUsuario())
-
+    let id_usuario = Number(ui.getIdUsuario())
+    
     let resultado = await fetch('http://localhost:4000/borrarUser', {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id_usario: id })
+        body: JSON.stringify({ id_usuario: id_usuario })
     })
     try {
         let response = await resultado.json();
@@ -201,12 +201,12 @@ async function fetchEliminarUsuario() {
 
 }
 
-async function eliminarUsuario() {
+async function eliminarUser() {
 
-    let response = fetchEliminarPelicula()
+    let response = fetchEliminarUsuario()
 
     if (response.res == 1) {
-        console.log("La pelicula se elimino correctamente")
+        console.log("Ek usuario se elimino correctamente")
         ui.clearInputs()
     }
 }
