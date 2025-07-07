@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body onload="fetchComparar()">
     <header>
         <h1>¿Qué vino primero?</h1>
     </header>
@@ -20,7 +20,7 @@
         <section id="section2">
             <div class="left">
                 <img id="img1" src="" onclick="clickeoImagen(1)" alt=""><!--aca va la imagen de la pelicula 1 -->
-                <h3 id="movieTitle"></h3>
+                <h3 id="movieTitle1"></h3>
             </div>
             <div class="middle">
                 <p id="score">0</p>
@@ -34,7 +34,7 @@
             </div>
             <div class="right">
                 <img id="img2" src="" onclick="clickeoImagen(2)" alt=""><!--aca va la imagen de la pelicula 2 -->
-                <h3 id="movieTitle"></h3>
+                <h3 id="movieTitle2"></h3>
             </div>
         </section>
     </main>

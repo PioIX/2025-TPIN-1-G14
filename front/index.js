@@ -211,11 +211,40 @@ async function eliminarUser() {
     }
 }
 
+
 function clickeoImagen(imagen) {
-    if (imagen) {
-        
+    if (imagen == 1) {
+        console.log(1)
+
+        if(correcta == ui.getTitle1){
+            return 
+        }
+        return 1
     }
     else{
-        
+        console.log(2)
+        return 2
     }
+}
+let correcta = ''
+async function fetchComparar () {
+
+    let resultado = await fetch('http://localhost:4000/compararEstrenos', {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+    let response = await resultado.json()
+
+    ui.setImg1(response[0].nombre_img1)
+    ui.setImg2(response[0].nombre_img2)
+    ui.setTitle1(response[0].pelicula_1)
+    ui.setTitle2(response[0].pelicula_2)
+
+    correcta = response[0].estreno_primero
+}
+
+async function comparar() { 
+
+    let resultado = await fetchComprar()
+  
 }

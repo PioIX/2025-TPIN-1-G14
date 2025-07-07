@@ -28,11 +28,11 @@ app.listen(port, function () {
                         DE ACA PARA ABAJO CODEO 
 ////////////////////////////////////////////////////////////////////*/
 
-app.get('/CompararEstrenos', async function (req, res) {
+app.get('/compararEstrenos', async function (req, res) {
     let respuesta
     try {
         console.log(req.query)
-        respuesta = await realizarQuery(`SELECT p1.nombre_pelicula AS pelicula_1, p1.fecha_estreno AS estreno_1, p2.nombre_pelicula AS pelicula_2, p2.fecha_estreno AS estreno_2,
+        respuesta = await realizarQuery(`SELECT p1.nombre_pelicula AS pelicula_1, p1.fecha_estreno AS estreno_1, p1.nombre_imagen AS nombre_img1, p2.nombre_pelicula AS pelicula_2, p2.fecha_estreno AS estreno_2, p2.nombre_imagen AS nombre_img2,
         IF(p1.fecha_estreno < p2.fecha_estreno, p1.nombre_pelicula, p2.nombre_pelicula) AS estreno_primero
         FROM Peliculas p1
         INNER JOIN Peliculas p2 ON p1.id_pelicula < p2.id_pelicula
@@ -93,20 +93,20 @@ app.delete('/borrarPelicula', async function (req, res) {
 })
 
 app.post('/insertarPeliculas', async function (req, res) {
-   try {
-     console.log(req.body)
-     const comprobar = await realizarQuery(`SELECT * FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
-     if (comprobar.length > 0) {
-         res.send({res: 2 })
-         return
-     } else {
-         await realizarQuery(`INSERT INTO Peliculas (id_pelicula, nombre_pelicula, fecha_estreno, nombre_imagen)
+    try {
+        console.log(req.body)
+        const comprobar = await realizarQuery(`SELECT * FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
+        if (comprobar.length > 0) {
+            res.send({ res: 2 })
+            return
+        } else {
+            await realizarQuery(`INSERT INTO Peliculas (id_pelicula, nombre_pelicula, fecha_estreno, nombre_imagen)
      VALUES (${req.body.id_pelicula}, '${req.body.nombre_pelicula}', '${req.body.fecha_estreno}', '${req.body.nombre_imagen}')`)
-         res.send({ res: 1 })
-     }
- 
-   } catch (error) {
+            res.send({ res: 1 })
+        }
+
+    } catch (error) {
         res.send(error)
-   }
+    }
 
 })

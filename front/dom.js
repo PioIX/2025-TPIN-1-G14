@@ -2,6 +2,31 @@ class UserInterface {
     constructor() {
 
     }
+
+    setImg1(nombreImg) {
+        document.getElementById("img1").src = nombreImg
+    }
+
+    setTitle1(nombre) {
+        document.getElementById("movieTitle1").innerHTML = nombre
+    }
+
+    getTitle1() {
+        return document.getElementById("movieTitle1").innerHTML
+    }
+
+    
+    setTitle2(nombre) {
+        document.getElementById("movieTitle2").innerHTML = nombre
+    }
+
+    getTitle2() {
+        return document.getElementById("movieTitle2").innerHTML
+    }
+
+    setImg2(nombreImg) {
+        document.getElementById("img2").src = nombreImg
+    }
     /**
      * Obtiene el texto ingresado en el input "Usuario", sección "Login".
      * @returns String que contiene el nombre de usuario.

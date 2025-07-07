@@ -58,6 +58,15 @@ input {
 #botonJuego{
     margin:0px;
 }
+
+img{
+    height: 70vh;
+}
+
+#section2{
+    display:flex;
+    justify-content:space-around;
+}
 /*hamburger menu logo
 .container {
     align-items: right;
