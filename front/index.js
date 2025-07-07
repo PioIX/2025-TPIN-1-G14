@@ -210,3 +210,12 @@ async function eliminarUser() {
         ui.clearInputs()
     }
 }
+
+function clickeoImagen(imagen) {
+    if (imagen) {
+        
+    }
+    else{
+        
+    }
+}
