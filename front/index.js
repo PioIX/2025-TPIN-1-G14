@@ -183,7 +183,7 @@ async function agregarPelicula(){
 async function fetchEliminarUsuario() {
 
     let id_usuario = Number(ui.getIdUsuario())
-    
+
     let resultado = await fetch('http://localhost:4000/borrarUser', {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -214,16 +214,24 @@ async function eliminarUser() {
 
 function clickeoImagen(imagen) {
     if (imagen == 1) {
-        console.log(1)
 
-        if(correcta == ui.getTitle1){
-            return 
+        if(correcta == ui.getTitle1()){
+            console.log(1)
+            return 1
+        }else{
+            console.log(2)
+            return 2
         }
-        return 1
     }
     else{
-        console.log(2)
-        return 2
+    
+       if(correcta == ui.getTitle2()){
+            console.log(1)
+            return 1
+        }else{
+            console.log(2)
+            return 2
+        }
     }
 }
 let correcta = ''
