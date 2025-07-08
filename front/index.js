@@ -258,7 +258,8 @@ async function fetchComparar() {
     console.log(response[0], idCorrecto);
     correcta = response[0].estreno_primero
 }
-
+let rondas = 1
+let score = 0
 async function comparar2(imagenPresionada) {
 
     let resultado = await fetch('http://localhost:4000/segundoComparar', {
@@ -276,9 +277,23 @@ async function comparar2(imagenPresionada) {
         ui.setTitle1(response[0].nombre_pelicula2)
     }
 
+    rondas++
+    score = score + 5
+    ui.setRondas(rondas)
+    ui.setScore(score)
 
 }
 
 function perdiste() {
+    rondas = 1
+    score = 0
     location.href = "./index3.html"
+}
+
+function volverInicio(){
+     location.href = "./index.html"
+}
+
+function juego() {
+    location.href = "./index2.html"
 }

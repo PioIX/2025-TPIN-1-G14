@@ -20,6 +20,15 @@ class UserInterface {
         document.getElementById("movieTitle2").innerHTML = nombre
     }
 
+    setRondas(rondas) {
+        document.getElementById("round_num").innerHTML = rondas
+    }
+
+    setScore(score) {
+        document.getElementById("score").innerHTML = score
+    }
+
+
     getTitle2() {
         return document.getElementById("movieTitle2").innerHTML
     }
