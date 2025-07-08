@@ -97,6 +97,12 @@ img{
     border-radius: 5rem;
 }
 
+#movieTitle1{
+    text-wrap: wrap;
+}
+#movieTitle2{
+    text-wrap: wrap;
+}
 /*hamburger menu logo
 .container {
     align-items: right;
