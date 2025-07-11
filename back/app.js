@@ -60,6 +60,7 @@ app.post('/segundoComparar', async function (req,res){
         res.send(error)
     }
 })
+
 app.post('/insertarUsuarios', async function (req, res) {//api para el register
     console.log(req.body)
     try {

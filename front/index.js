@@ -57,8 +57,6 @@ async function logInFetch() {
         contraseña: ui.getPassword(),
         id_usuario: ui.getId()
     }
-
-
     try {
         let resultado = await fetch('http://localhost:4000/verificarUser', {
             method: "POST",
@@ -213,6 +211,7 @@ async function eliminarUser() {
 
 
 function clickeoImagen(imagen) {
+    
     if (imagen == 1) {
 
         if (correcta == ui.getTitle1()) {
@@ -230,7 +229,7 @@ function clickeoImagen(imagen) {
 
         if (correcta == ui.getTitle2()) {
             console.log(1)
-            let respuesta = comparar2(imagen)
+            let respuesta = comparar2(imagen,correcta1)
             return 1
         } else {
             console.log(2)
@@ -254,13 +253,14 @@ async function fetchComparar() {
     ui.setTitle1(response[0].pelicula_1)
     ui.setTitle2(response[0].pelicula_2)
 
+    
     idCorrecto = response[0].id_primero;
     console.log(response[0], idCorrecto);
     correcta = response[0].estreno_primero
 }
 let rondas = 1
 let score = 0
-async function comparar2(imagenPresionada) {
+async function comparar2(imagenPresionada,primerEstreno) {
 
     let resultado = await fetch('http://localhost:4000/segundoComparar', {
         method: "POST",
@@ -269,6 +269,8 @@ async function comparar2(imagenPresionada) {
     })
     let response = await resultado.json()
 
+    let estreno2 = response[0].estreno_2
+    console.log(estreno2)
     if (imagenPresionada == 1) {
         ui.setImg2(response[0].nombre_img2)
         ui.setTitle2(response[0].nombre_pelicula2)
