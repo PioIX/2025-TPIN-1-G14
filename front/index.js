@@ -262,6 +262,8 @@ async function fetchComparar() {
 let rondas = 1
 let score = 0
 
+
+let finalScore = 0
 function comparar(){
     
 }
@@ -308,7 +310,14 @@ async function comparar2(imagenPresionada) {
     return(estrenoCorrecto,tituloCorrecto,idCorrecto)
 }
 
+function guardarPuntaje(puntaje){
+    finalScore = puntaje
+    return(finalScore)
+}
+
 function perdiste() {
+    //let respuesta = guardarPuntaje(score)
+    ui.setScore(score)
     rondas = 1
     score = 0
     location.href = "./index3.html"
