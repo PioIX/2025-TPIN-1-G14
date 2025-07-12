@@ -103,6 +103,13 @@ img{
 #movieTitle2{
     text-wrap: wrap;
 }
+a:visited{
+    color:black;
+}
+a:visited:hover{
+    color:gray;
+}
+
 /*hamburger menu logo
 .container {
     align-items: right;

@@ -214,9 +214,9 @@ function clickeoImagen(imagen) {
     
     if (imagen == 1) {
 
-        if (correcta == ui.getTitle1()) {
+        if (tituloCorrecto == ui.getTitle1()) {
             console.log(1)
-            let respuesta = comparar2(imagen)
+            let respuesta = comparar2(imagen,estrenoCorrecto)
             return 1
 
         } else {
@@ -227,9 +227,9 @@ function clickeoImagen(imagen) {
     }
     else {
 
-        if (correcta == ui.getTitle2()) {
+        if (tituloCorrecto == ui.getTitle2()) {
             console.log(1)
-            let respuesta = comparar2(imagen,correcta1)
+            let respuesta = comparar2(imagen,estrenoCorrecto)
             return 1
         } else {
             console.log(2)
@@ -256,11 +256,16 @@ async function fetchComparar() {
     
     idCorrecto = response[0].id_primero;
     console.log(response[0], idCorrecto);
-    correcta = response[0].estreno_primero
+    tituloCorrecto = response[0].estreno_primero
+    estrenoCorrecto = response[0].estreno_correcto
 }
 let rondas = 1
 let score = 0
-async function comparar2(imagenPresionada,primerEstreno) {
+
+function comparar(){
+    
+}
+async function comparar2(imagenPresionada) {
 
     let resultado = await fetch('http://localhost:4000/segundoComparar', {
         method: "POST",
@@ -268,22 +273,39 @@ async function comparar2(imagenPresionada,primerEstreno) {
         body: JSON.stringify({ id: idCorrecto })
     })
     let response = await resultado.json()
+    
+    console.log(estrenoCorrecto,tituloCorrecto,estrenoCorrecto)
 
+
+    let id2 = response[0].id_pelicula2
+    let pelicula2 = response[0].pelicula_2
     let estreno2 = response[0].estreno_2
-    console.log(estreno2)
+
+
+    console.log(estreno2,pelicula2,id2)
+
+
+
+    if(estrenoCorrecto > estreno2){
+        estrenoCorrecto = estreno2
+        tituloCorrecto = pelicula2
+        idCorrecto = id2
+    }
+    console.log(estrenoCorrecto,tituloCorrecto,estrenoCorrecto)
+
     if (imagenPresionada == 1) {
         ui.setImg2(response[0].nombre_img2)
-        ui.setTitle2(response[0].nombre_pelicula2)
+        ui.setTitle2(pelicula2)
     } else {
         ui.setImg1(response[0].nombre_img2)
-        ui.setTitle1(response[0].nombre_pelicula2)
+        ui.setTitle1(pelicula2)
     }
 
     rondas++
     score = score + 5
     ui.setRondas(rondas)
     ui.setScore(score)
-
+    return(estrenoCorrecto,tituloCorrecto,idCorrecto)
 }
 
 function perdiste() {

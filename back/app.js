@@ -33,7 +33,7 @@ app.get('/compararEstrenos', async function (req, res) {
     try {
         console.log(req.query)
         respuesta = await realizarQuery(`SELECT p1.id_pelicula AS id_pelicula1, p1.nombre_pelicula AS pelicula_1, p1.fecha_estreno AS estreno_1, p1.nombre_imagen AS nombre_img1, p2.nombre_pelicula AS pelicula_2, p2.fecha_estreno AS estreno_2, p2.nombre_imagen AS nombre_img2, p2.id_pelicula AS id_pelicula2,
-        IF(p1.fecha_estreno < p2.fecha_estreno, p1.nombre_pelicula, p2.nombre_pelicula) AS estreno_primero, IF(p1.fecha_estreno < p2.fecha_estreno, p1.id_pelicula, p2.id_pelicula) AS id_primero
+        IF(p1.fecha_estreno < p2.fecha_estreno, p1.nombre_pelicula, p2.nombre_pelicula) AS estreno_primero, IF(p1.fecha_estreno < p2.fecha_estreno, p1.id_pelicula, p2.id_pelicula) AS id_primero, IF(p1.fecha_estreno < p2.fecha_estreno, p1.fecha_estreno, p2.fecha_estreno) AS estreno_correcto
         FROM Peliculas p1
         INNER JOIN Peliculas p2 ON p1.id_pelicula < p2.id_pelicula
         ORDER BY RAND()
@@ -49,7 +49,7 @@ app.post('/segundoComparar', async function (req,res){
     let respuesta
     try {
         console.log(req.body)
-        respuesta = await realizarQuery(`SELECT id_pelicula, nombre_pelicula AS pelicula_2, fecha_estreno AS estreno_2, nombre_imagen AS nombre_img2
+        respuesta = await realizarQuery(`SELECT id_pelicula AS id_pelicula2, nombre_pelicula AS pelicula_2, fecha_estreno AS estreno_2, nombre_imagen AS nombre_img2
         FROM Peliculas
         WHERE id_pelicula != '${req.body.id_pelicula}'
         ORDER BY RAND()
