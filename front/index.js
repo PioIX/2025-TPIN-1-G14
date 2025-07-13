@@ -216,12 +216,13 @@ function clickeoImagen(imagen) {
 
         if (tituloCorrecto == ui.getTitle1()) {
             console.log(1)
-            let respuesta = comparar2(imagen,estrenoCorrecto)
+            comparar2(imagen,estrenoCorrecto)
             return 1
 
-        } else {
+        } else if(tituloCorrecto != ui.getTitle1){
             console.log(2)
-            let respuesta = perdiste()
+            console.log(score)
+            perdiste()
             return 2
         }
     }
@@ -229,11 +230,12 @@ function clickeoImagen(imagen) {
 
         if (tituloCorrecto == ui.getTitle2()) {
             console.log(1)
-            let respuesta = comparar2(imagen,estrenoCorrecto)
+            comparar2(imagen,estrenoCorrecto)
             return 1
-        } else {
+        } else if(tituloCorrecto != ui.getTitle2){
             console.log(2)
-            let respuesta = perdiste()
+            console.log(score)
+            perdiste()
             return 2
         }
     }
@@ -310,16 +312,18 @@ async function comparar2(imagenPresionada) {
     return(estrenoCorrecto,tituloCorrecto,idCorrecto)
 }
 
-function guardarPuntaje(puntaje){
+/*function guardarPuntaje(puntaje){
     finalScore = puntaje
     return(finalScore)
-}
+}*/
 
 function perdiste() {
     //let respuesta = guardarPuntaje(score)
-    ui.setScore(score)
+    console.log(score)
     rondas = 1
-    score = 0
+    let finalScore = ui.getScore()
+    console.log(finalScore)
+    //score = 0
     location.href = "./index3.html"
 }
 
