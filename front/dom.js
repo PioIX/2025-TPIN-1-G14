@@ -27,13 +27,14 @@ class UserInterface {
     setScore(score) {
         document.getElementById("score").innerHTML = score
     }
+
     getScore() {
         let score = document.getElementById("score").textContent
         return score;
     }
 
-    setFinalScore(finalScore) {
-        document.getElementById("finalScore").innerHTML = finalScore
+    setFinalScore(score) {
+        document.getElementById("finalScore").innerHTML = score
     }
 
 

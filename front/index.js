@@ -222,7 +222,8 @@ function clickeoImagen(imagen) {
         } else if(tituloCorrecto != ui.getTitle1){
             console.log(2)
             console.log(score)
-            perdiste()
+            //ui.setFinalScore(score)
+            perdiste(score)
             return 2
         }
     }
@@ -235,10 +236,16 @@ function clickeoImagen(imagen) {
         } else if(tituloCorrecto != ui.getTitle2){
             console.log(2)
             console.log(score)
-            perdiste()
+            //ui.setFinalScore(score)
+            perdiste(score)
             return 2
         }
     }
+}
+
+function guardarScore(score) {
+    let finalScore = score
+    return finalScore
 }
 let correcta = ''
 let idCorrecto = -1;
@@ -262,13 +269,9 @@ async function fetchComparar() {
     estrenoCorrecto = response[0].estreno_correcto
 }
 let rondas = 1
+
 let score = 0
 
-
-let finalScore = 0
-function comparar(){
-    
-}
 async function comparar2(imagenPresionada) {
 
     let resultado = await fetch('http://localhost:4000/segundoComparar', {
@@ -307,6 +310,7 @@ async function comparar2(imagenPresionada) {
 
     rondas++
     score = score + 5
+    console.log(score)
     ui.setRondas(rondas)
     ui.setScore(score)
     return(estrenoCorrecto,tituloCorrecto,idCorrecto)
@@ -317,18 +321,19 @@ async function comparar2(imagenPresionada) {
     return(finalScore)
 }*/
 
-function perdiste() {
+function perdiste(score) {
     //let respuesta = guardarPuntaje(score)
-    console.log(score)
     rondas = 1
-    let finalScore = ui.getScore()
-    console.log(finalScore)
     //score = 0
+    let finalScore = guardarScore(score)
     location.href = "./index3.html"
+    ui.setFinalScore(finalScore)
+    console.log(score)
+    //ui.setFinalScore(score)
 }
 
 function volverInicio(){
-     location.href = "./index.html"
+    location.href = "./index.html"
 }
 
 function juego() {
