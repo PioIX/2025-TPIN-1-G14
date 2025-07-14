@@ -339,11 +339,37 @@ function juego() {
     location.href = "./index2.html"
 }
 
+function ranking() {
+    location.href = "./index4.html"
+}
+
 async function fetchRanking() {
     let resultado = await fetch('http://localhost:4000/rankingPuntajes', {
         method: "GET",
         headers: { "Content-Type": "application/json" }
     })
     let response = await resultado.json()
-    console.log(response)
+    return(response.res)
 }
+
+async function rellenarRanking(){
+
+    let content = await fetchRanking()
+    console.log(content)
+    document.getElementById("scoreRanking").innerText =content
+    //let tabla = ``
+
+    /*for (let i = 0; i < cantantes.length; i++) {
+        tabla += `<tr>
+            <td>${cantantes[i].nombre}</td>
+            <td>${cantantes[i].apellido}</td>
+            <td>${cantantes[i].edad}</td>
+            <td>${cantantes[i].cant_grammys}</td>
+            <td>${cantantes[i].id_cantante}</td>
+            </tr>
+        `
+    }*/
+
+    
+}
+

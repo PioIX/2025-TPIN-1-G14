@@ -24,6 +24,9 @@ class UserInterface {
         document.getElementById("round_num").innerHTML = rondas
     }
 
+    setRanking(table){
+        document.getElementById("tabla").innerHTML = table
+    }
     setScore(score) {
         document.getElementById("score").innerHTML = score
     }

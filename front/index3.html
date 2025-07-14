@@ -10,24 +10,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
-<body onload = "llenarScore()">
+
+<body onload="llenarScore()">
     <header>
-        <h1>¡Que mala leche!</h1>
-        <h2>Vuelve a intentarlo...</h2>
+        <div class="w3-container">
+            <h1 class="spin">Perdiste</h1>
+        </div>
     </header>
     <main>
         <section id="section3">
+            <h2>¡Que mala leche!</h2>
+            <h2>Vuelve a intentarlo...</h2>
             <h3>Tu puntaje final es:</h3>
             <p id="finalScore">0</p>
         </section>
         <section id="section4">
             <div class="container">
-                <button><a href="index2.html">Jugar de vuelta</a></button>
-                <button><a href="index4.html">Ver ranking de puntajes</a></button>
+                <button onclick="juego()">Jugar de vuelta</button>
+                <button onclick="ranking()">Ver ranking de puntajes</button>
             </div>
         </section>
     </main>
-  
+
     <script src="dom.js"></script>
     <script src="index.js"></script>
     <script src="index3.js"></script>

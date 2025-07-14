@@ -90,6 +90,28 @@ img{
     font-style: normal;
 }
 
+#section3{
+    padding-top: 5rem;
+}
+@keyframes spin { 
+    0%{
+        transform: rotate(0deg)
+    }
+    100%{
+        transform: rotate(360deg)
+    }
+    
+}
+
+.spin {
+    padding-top:2rem;
+    font-size:5rem;
+    display: inline-block;
+    animation: spin 1.5s linear infinite; /* 2 seconds, linear, infinite loop */
+    
+}
+
+
 #or{
     font-size:2rem;
     background-color: gray;
