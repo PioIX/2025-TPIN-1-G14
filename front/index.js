@@ -79,7 +79,7 @@ async function logIn() {
     if (respuesta == 1) {
         idLogged = ui.getId()
 
-        localStorage.setItem("idLogged",idLogged)
+        localStorage.setItem("idLogged", idLogged)
         //let user = ui.getUser()
         ui.clearLoginInputs()
         if (idLogged == 3) {
@@ -213,15 +213,15 @@ async function eliminarUser() {
 
 
 function clickeoImagen(imagen) {
-    
+
     if (imagen == 1) {
 
         if (tituloCorrecto == ui.getTitle1()) {
             console.log(1)
-            comparar2(imagen,estrenoCorrecto)
+            comparar2(imagen, estrenoCorrecto)
             return 1
 
-        } else if(tituloCorrecto != ui.getTitle1){
+        } else if (tituloCorrecto != ui.getTitle1) {
             console.log(2)
             console.log(score)
             //ui.setFinalScore(score)
@@ -233,9 +233,9 @@ function clickeoImagen(imagen) {
 
         if (tituloCorrecto == ui.getTitle2()) {
             console.log(1)
-            comparar2(imagen,estrenoCorrecto)
+            comparar2(imagen, estrenoCorrecto)
             return 1
-        } else if(tituloCorrecto != ui.getTitle2){
+        } else if (tituloCorrecto != ui.getTitle2) {
             console.log(2)
             console.log(score)
             //ui.setFinalScore(score)
@@ -264,7 +264,7 @@ async function fetchComparar() {
     ui.setTitle1(response[0].pelicula_1)
     ui.setTitle2(response[0].pelicula_2)
 
-    
+
     idCorrecto = response[0].id_primero;
     console.log(response[0], idCorrecto);
     tituloCorrecto = response[0].estreno_primero
@@ -282,8 +282,8 @@ async function comparar2(imagenPresionada) {
         body: JSON.stringify({ id: idCorrecto })
     })
     let response = await resultado.json()
-    
-    console.log(estrenoCorrecto,tituloCorrecto,estrenoCorrecto)
+
+    console.log(estrenoCorrecto, tituloCorrecto, estrenoCorrecto)
 
 
     let id2 = response[0].id_pelicula2
@@ -291,16 +291,16 @@ async function comparar2(imagenPresionada) {
     let estreno2 = response[0].estreno_2
 
 
-    console.log(estreno2,pelicula2,id2)
+    console.log(estreno2, pelicula2, id2)
 
 
 
-    if(estrenoCorrecto > estreno2){
+    if (estrenoCorrecto > estreno2) {
         estrenoCorrecto = estreno2
         tituloCorrecto = pelicula2
         idCorrecto = id2
     }
-    console.log(estrenoCorrecto,tituloCorrecto,estrenoCorrecto)
+    console.log(estrenoCorrecto, tituloCorrecto, estrenoCorrecto)
 
     if (imagenPresionada == 1) {
         ui.setImg2(response[0].nombre_img2)
@@ -315,7 +315,7 @@ async function comparar2(imagenPresionada) {
     console.log(score)
     ui.setRondas(rondas)
     ui.setScore(score)
-    return(estrenoCorrecto,tituloCorrecto,idCorrecto)
+    return (estrenoCorrecto, tituloCorrecto, idCorrecto)
 }
 
 /*function guardarPuntaje(puntaje){
@@ -327,14 +327,23 @@ function perdiste(score) {
 
     rondas = 1
     let finalScore = guardarScore(score)
-    localStorage.setItem("score",score);
+    localStorage.setItem("score", score);
     location.href = "./index3.html"
 }
 
-function volverInicio(){
+function volverInicio() {
     location.href = "./index.html"
 }
 
 function juego() {
     location.href = "./index2.html"
+}
+
+async function fetchRanking() {
+    let resultado = await fetch('http://localhost:4000/rankingPuntajes', {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+    })
+    let response = await resultado.json()
+    console.log(response)
 }

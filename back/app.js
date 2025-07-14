@@ -85,11 +85,12 @@ app.post('/puntaje', async function (req, res) {//
 app.get('/rankingPuntajes', async function (req, res) {//
     let respuesta
     try {
-        respuesta = (`SELECT puntaje_total, usuario FROM Puntajes
+        respuesta = await realizarQuery(`SELECT puntaje_total, usuario 
+                            FROM Puntajes
                             INNER JOIN Usuarios ON Puntajes.id_usuario = Usuarios.id_usuario
                             ORDER BY puntaje_total DESC 
                             LIMIT 10;`)
-        res.send(respuesta)
+        res.send({res: respuesta})
     } catch (error) {
         res.send(error)
     }
