@@ -78,6 +78,8 @@ async function logIn() {
     let respuesta = await logInFetch();
     if (respuesta == 1) {
         idLogged = ui.getId()
+
+        localStorage.setItem("idLogged",idLogged)
         //let user = ui.getUser()
         ui.clearLoginInputs()
         if (idLogged == 3) {
@@ -322,14 +324,11 @@ async function comparar2(imagenPresionada) {
 }*/
 
 function perdiste(score) {
-    //let respuesta = guardarPuntaje(score)
+
     rondas = 1
-    //score = 0
     let finalScore = guardarScore(score)
+    localStorage.setItem("score",score);
     location.href = "./index3.html"
-    ui.setFinalScore(finalScore)
-    console.log(score)
-    //ui.setFinalScore(score)
 }
 
 function volverInicio(){

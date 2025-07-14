@@ -45,7 +45,7 @@ app.get('/compararEstrenos', async function (req, res) {
     }
 });
 
-app.post('/segundoComparar', async function (req,res){ 
+app.post('/segundoComparar', async function (req, res) {
     let respuesta
     try {
         console.log(req.body)
@@ -61,6 +61,26 @@ app.post('/segundoComparar', async function (req,res){
     }
 })
 
+
+app.post('/puntaje', async function (req, res) {//
+    console.log(req.body)
+    try {
+        const comprobar = await realizarQuery(`SELECT * FROM Puntajes WHERE id_usuario = '${req.body.idLogged}'`)
+        if (comprobar.length > 0) {
+            await realizarQuery(`UPDATE Puntajes SET puntaje_actual = '${req.body.score}' WHERE id_usuario = '${req.body.idLogged}'`)
+            const puntTotal = await realizarQuery(`SELECT puntaje_total FROM Puntajes WHERE id_usuario = '${req.body.idLogged}'`)
+            if(puntTotal[0].puntaje_total < req.body.score){
+                await realizarQuery(`UPDATE Puntajes SET puntaje_total = '${req.body.score}' WHERE id_usuario = '${req.body.idLogged}'`)
+            }
+        } else {
+            await realizarQuery(`INSERT INTO Puntajes (id_usuario,puntaje_total,puntaje_actual)
+                VALUES ('${req.body.idLogged}', ${req.body.score}, '${req.body.score}')`)
+        }
+        res.send({ res: 1, msg: "Puntajes agregados o actualizados" })
+    } catch (error) {
+        res.send(error)
+    }
+})
 app.post('/insertarUsuarios', async function (req, res) {//api para el register
     console.log(req.body)
     try {
