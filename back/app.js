@@ -69,7 +69,7 @@ app.post('/puntaje', async function (req, res) {//
         if (comprobar.length > 0) {
             await realizarQuery(`UPDATE Puntajes SET puntaje_actual = '${req.body.score}' WHERE id_usuario = '${req.body.idLogged}'`)
             const puntTotal = await realizarQuery(`SELECT puntaje_total FROM Puntajes WHERE id_usuario = '${req.body.idLogged}'`)
-            if(puntTotal[0].puntaje_total < req.body.score){
+            if (puntTotal[0].puntaje_total < req.body.score) {
                 await realizarQuery(`UPDATE Puntajes SET puntaje_total = '${req.body.score}' WHERE id_usuario = '${req.body.idLogged}'`)
             }
         } else {
@@ -81,6 +81,21 @@ app.post('/puntaje', async function (req, res) {//
         res.send(error)
     }
 })
+
+app.get('/rankingPuntajes', async function (req, res) {//
+    let respuesta
+    try {
+        respuesta = (`SELECT puntaje_total, usuario FROM Puntajes
+                            INNER JOIN Usuarios ON Puntajes.id_usuario = Usuarios.id_usuario
+                            ORDER BY puntaje_total DESC 
+                            LIMIT 10;`)
+        res.send(respuesta)
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+
 app.post('/insertarUsuarios', async function (req, res) {//api para el register
     console.log(req.body)
     try {
