@@ -366,17 +366,6 @@ async function rellenarRanking() {
           </tr>`;
         }
     document.getElementById("scoreRanking").innerHTML += tabla;
-    /*for (let i = 0; i < cantantes.length; i++) {
-        tabla += `<tr>
-            <td>${cantantes[i].nombre}</td>
-            <td>${cantantes[i].apellido}</td>
-            <td>${cantantes[i].edad}</td>
-            <td>${cantantes[i].cant_grammys}</td>
-            <td>${cantantes[i].id_cantante}</td>
-            </tr>
-        
-    }*/
-
 
 }
 
