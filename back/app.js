@@ -90,7 +90,7 @@ app.get('/rankingPuntajes', async function (req, res) {//
                             INNER JOIN Usuarios ON Puntajes.id_usuario = Usuarios.id_usuario
                             ORDER BY puntaje_total DESC 
                             LIMIT 10;`)
-        res.send({respuesta})
+        res.send({data: respuesta})
     } catch (error) {
         res.send(error)
     }

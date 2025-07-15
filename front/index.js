@@ -347,18 +347,25 @@ async function fetchRanking() {
     let resultado = await fetch('http://localhost:4000/rankingPuntajes', {
         method: "GET",
         headers: { "Content-Type": "application/json" }
-    })
+    });
     let response = await resultado.json()
-    return(response.res)
+    return (response)
 }
 
-async function rellenarRanking(){
+async function rellenarRanking() {
 
     let content = await fetchRanking()
     console.log(content)
-    document.getElementById("scoreRanking").innerText =content
-    //let tabla = ``
+    //document.getElementById("scoreRanking").innerText =content
+    let tabla = ``
 
+    for (let i = 0; i < content.data.length; i++) {
+        tabla += `<tr>
+            <td>${content.data[i].usuario}</td>
+            <td>${content.data[i].puntaje_total}</td>
+          </tr>`;
+        }
+    document.getElementById("scoreRanking").innerHTML += tabla;
     /*for (let i = 0; i < cantantes.length; i++) {
         tabla += `<tr>
             <td>${cantantes[i].nombre}</td>
@@ -367,9 +374,9 @@ async function rellenarRanking(){
             <td>${cantantes[i].cant_grammys}</td>
             <td>${cantantes[i].id_cantante}</td>
             </tr>
-        `
+        
     }*/
 
-    
+
 }
 
