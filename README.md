@@ -68,7 +68,6 @@ Tareas:
     10. Testeo
 
 Responsabilidades:
-![¿Qué vino primero?](TrabajoIntegrador.drawio.png)
     1. Peralta
     2. Salvadori
     3. Iglesias
@@ -80,3 +79,5 @@ Responsabilidades:
     9. Solá
     10. Todos
 
+Diagrama de Entidades de Relacion:
+![DER](TrabajoIntegrador.drawio.png)
