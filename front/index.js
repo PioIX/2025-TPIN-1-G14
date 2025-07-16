@@ -39,6 +39,7 @@ async function register() {
     let respuesta = await registerFetch();
     if (respuesta == 1) {
         idLogged = ui.getId()
+        localStorage.setItem("idLogged", idLogged)
         //let user = ui.getUser()
         ui.clearLoginInputs()
         location.href = "./index2.html"

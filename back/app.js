@@ -72,11 +72,12 @@ app.post('/puntaje', async function (req, res) {//
             if (puntTotal[0].puntaje_total < req.body.score) {
                 await realizarQuery(`UPDATE Puntajes SET puntaje_total = '${req.body.score}' WHERE id_usuario = '${req.body.idLogged}'`)
                 res.send({ res: 1, msg: "Puntajes actualizados" })
-            }res.send({ res: 1, msg: "Puntaje actual actualizado" })
-        } else /*if(comprobar.length == 0)*/{
+            } res.send({ res: 1, msg: "Puntaje actual actualizado" })
+        } else /*if(comprobar.length == 0)*/ {
+            console.log(req.body)
             await realizarQuery(`INSERT INTO Puntajes (id_usuario,puntaje_total,puntaje_actual)
                 VALUES ('${req.body.idLogged}', ${req.body.score}, '${req.body.score}')`)
-                res.send({ res: 1, msg: "Puntaje agregado" })
+            res.send({ res: 1, msg: "Puntaje agregado" })
         }
     } catch (error) {
         res.send(error)
@@ -91,7 +92,7 @@ app.get('/rankingPuntajes', async function (req, res) {//
                             INNER JOIN Usuarios ON Puntajes.id_usuario = Usuarios.id_usuario
                             ORDER BY puntaje_total DESC 
                             LIMIT 10;`)
-        res.send({data: respuesta})
+        res.send({ data: respuesta })
     } catch (error) {
         res.send(error)
     }
