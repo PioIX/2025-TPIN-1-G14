@@ -80,8 +80,10 @@ Responsabilidades:
     9. Solá
     10. Todos
 
-Diagrama de Gannt
+Diagrama de Gannt:
+
 ![DER](gannt)
     
 Diagrama de Entidades de Relacion:
+
 ![DER](TrabajoIntegrador.drawio.png)
