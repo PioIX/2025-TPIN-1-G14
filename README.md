@@ -68,7 +68,7 @@ Tareas:
     10. Testeo
 
 Responsabilidades:
-
+![¿Qué vino primero?](2025-TPIN-1-G14/TrabajoIntegrador.drawio.png)
     1. Peralta
     2. Salvadori
     3. Iglesias
