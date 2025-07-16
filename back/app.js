@@ -71,12 +71,13 @@ app.post('/puntaje', async function (req, res) {//
             const puntTotal = await realizarQuery(`SELECT puntaje_total FROM Puntajes WHERE id_usuario = '${req.body.idLogged}'`)
             if (puntTotal[0].puntaje_total < req.body.score) {
                 await realizarQuery(`UPDATE Puntajes SET puntaje_total = '${req.body.score}' WHERE id_usuario = '${req.body.idLogged}'`)
-            }
-        } else if(comprobar == 0){
+                res.send({ res: 1, msg: "Puntajes actualizados" })
+            }res.send({ res: 1, msg: "Puntaje actual actualizado" })
+        } else if(comprobar.length == 0){
             await realizarQuery(`INSERT INTO Puntajes (id_usuario,puntaje_total,puntaje_actual)
-                VALUES ('${req.body.idLogged}', ${req.body.score_total}, '${req.body.score}')`)
+                VALUES ('${req.body.idLogged}', ${req.body.score}, '${req.body.score}')`)
+                res.send({ res: 1, msg: "Puntaje agregado" })
         }
-        res.send({ res: 1, msg: "Puntajes agregados o actualizados" })
     } catch (error) {
         res.send(error)
     }

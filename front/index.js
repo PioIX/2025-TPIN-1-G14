@@ -78,7 +78,6 @@ async function logIn() {
     let respuesta = await logInFetch();
     if (respuesta == 1) {
         idLogged = ui.getId()
-
         localStorage.setItem("idLogged", idLogged)
         //let user = ui.getUser()
         ui.clearLoginInputs()

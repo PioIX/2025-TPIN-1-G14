@@ -6,7 +6,6 @@ async function llenarScore() {
 
     let datos = {
         score: parseInt(localStorage.getItem("score")),
-        score_total: parseInt(localStorage.getItem("score")),
         idLogged: parseInt(localStorage.getItem("idLogged")),
     }
     
