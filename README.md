@@ -68,6 +68,7 @@ Tareas:
     10. Testeo
 
 Responsabilidades:
+
     1. Peralta
     2. Salvadori
     3. Iglesias
@@ -79,5 +80,8 @@ Responsabilidades:
     9. Solá
     10. Todos
 
+Diagrama de Gannt
+![DER](gannt)
+    
 Diagrama de Entidades de Relacion:
 ![DER](TrabajoIntegrador.drawio.png)
