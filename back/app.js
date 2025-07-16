@@ -28,12 +28,12 @@ app.listen(port, function () {
                         DE ACA PARA ABAJO CODEO 
 ////////////////////////////////////////////////////////////////////*/
 
-app.get('/CompararEstrenos', async function (req, res) {
+app.get('/compararEstrenos', async function (req, res) {
     let respuesta
     try {
         console.log(req.query)
-        respuesta = await realizarQuery(`SELECT p1.nombre_pelicula AS pelicula_1, p1.fecha_estreno AS estreno_1, p2.nombre_pelicula AS pelicula_2, p2.fecha_estreno AS estreno_2,
-        IF(p1.fecha_estreno < p2.fecha_estreno, p1.nombre_pelicula, p2.nombre_pelicula) AS estreno_primero
+        respuesta = await realizarQuery(`SELECT p1.id_pelicula AS id_pelicula1, p1.nombre_pelicula AS pelicula_1, p1.fecha_estreno AS estreno_1, p1.nombre_imagen AS nombre_img1, p2.nombre_pelicula AS pelicula_2, p2.fecha_estreno AS estreno_2, p2.nombre_imagen AS nombre_img2, p2.id_pelicula AS id_pelicula2,
+        IF(p1.fecha_estreno < p2.fecha_estreno, p1.nombre_pelicula, p2.nombre_pelicula) AS estreno_primero, IF(p1.fecha_estreno < p2.fecha_estreno, p1.id_pelicula, p2.id_pelicula) AS id_primero, IF(p1.fecha_estreno < p2.fecha_estreno, p1.fecha_estreno, p2.fecha_estreno) AS estreno_correcto
         FROM Peliculas p1
         INNER JOIN Peliculas p2 ON p1.id_pelicula < p2.id_pelicula
         ORDER BY RAND()
@@ -44,6 +44,59 @@ app.get('/CompararEstrenos', async function (req, res) {
         res.send(error)
     }
 });
+
+app.post('/segundoComparar', async function (req, res) {
+    let respuesta
+    try {
+        console.log(req.body)
+        respuesta = await realizarQuery(`SELECT id_pelicula AS id_pelicula2, nombre_pelicula AS pelicula_2, fecha_estreno AS estreno_2, nombre_imagen AS nombre_img2
+        FROM Peliculas
+        WHERE id_pelicula != '${req.body.id_pelicula}'
+        ORDER BY RAND()
+        LIMIT 1;`)
+        res.send(respuesta)
+    }
+    catch (error) {
+        res.send(error)
+    }
+})
+
+
+app.post('/puntaje', async function (req, res) {//
+    console.log(req.body)
+    try {
+        const comprobar = await realizarQuery(`SELECT * FROM Puntajes WHERE id_usuario = '${req.body.idLogged}'`)
+        if (comprobar.length > 0) {
+            await realizarQuery(`UPDATE Puntajes SET puntaje_actual = '${req.body.score}' WHERE id_usuario = '${req.body.idLogged}'`)
+            const puntTotal = await realizarQuery(`SELECT puntaje_total FROM Puntajes WHERE id_usuario = '${req.body.idLogged}'`)
+            if (puntTotal[0].puntaje_total < req.body.score) {
+                await realizarQuery(`UPDATE Puntajes SET puntaje_total = '${req.body.score}' WHERE id_usuario = '${req.body.idLogged}'`)
+                res.send({ res: 1, msg: "Puntajes actualizados" })
+            } res.send({ res: 1, msg: "Puntaje actual actualizado" })
+        } else /*if(comprobar.length == 0)*/ {
+            console.log(req.body)
+            await realizarQuery(`INSERT INTO Puntajes (id_usuario,puntaje_total,puntaje_actual)
+                VALUES ('${req.body.idLogged}', ${req.body.score}, '${req.body.score}')`)
+            res.send({ res: 1, msg: "Puntaje agregado" })
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+app.get('/rankingPuntajes', async function (req, res) {//
+    let respuesta
+    try {
+        respuesta = await realizarQuery(`SELECT puntaje_total, usuario 
+                            FROM Puntajes
+                            INNER JOIN Usuarios ON Puntajes.id_usuario = Usuarios.id_usuario
+                            ORDER BY puntaje_total DESC 
+                            LIMIT 10;`)
+        res.send({ data: respuesta })
+    } catch (error) {
+        res.send(error)
+    }
+})
 
 
 app.post('/insertarUsuarios', async function (req, res) {//api para el register
@@ -93,20 +146,20 @@ app.delete('/borrarPelicula', async function (req, res) {
 })
 
 app.post('/insertarPeliculas', async function (req, res) {
-   try {
-     console.log(req.body)
-     const comprobar = await realizarQuery(`SELECT * FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
-     if (comprobar.length > 0) {
-         res.send({res: 2 })
-         return
-     } else {
-         await realizarQuery(`INSERT INTO Peliculas (id_pelicula, nombre_pelicula, fecha_estreno, nombre_imagen)
+    try {
+        console.log(req.body)
+        const comprobar = await realizarQuery(`SELECT * FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
+        if (comprobar.length > 0) {
+            res.send({ res: 2 })
+            return
+        } else {
+            await realizarQuery(`INSERT INTO Peliculas (id_pelicula, nombre_pelicula, fecha_estreno, nombre_imagen)
      VALUES (${req.body.id_pelicula}, '${req.body.nombre_pelicula}', '${req.body.fecha_estreno}', '${req.body.nombre_imagen}')`)
-         res.send({ res: 1 })
-     }
- 
-   } catch (error) {
+            res.send({ res: 1 })
+        }
+
+    } catch (error) {
         res.send(error)
-   }
+    }
 
 })

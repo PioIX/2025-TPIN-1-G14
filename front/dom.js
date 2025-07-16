@@ -2,6 +2,52 @@ class UserInterface {
     constructor() {
 
     }
+
+    setImg1(nombreImg) {
+        document.getElementById("img1").src = nombreImg
+    }
+
+    setTitle1(nombre) {
+        document.getElementById("movieTitle1").innerHTML = nombre
+    }
+
+    getTitle1() {
+        return document.getElementById("movieTitle1").innerHTML
+    }
+
+    
+    setTitle2(nombre) {
+        document.getElementById("movieTitle2").innerHTML = nombre
+    }
+
+    setRondas(rondas) {
+        document.getElementById("round_num").innerHTML = rondas
+    }
+
+    setRanking(table){
+        document.getElementById("tabla").innerHTML = table
+    }
+    setScore(score) {
+        document.getElementById("score").innerHTML = score
+    }
+
+    getScore() {
+        let score = document.getElementById("score").textContent
+        return score;
+    }
+
+    setFinalScore(score) {
+        document.getElementById("finalScore").innerHTML = score
+    }
+
+
+    getTitle2() {
+        return document.getElementById("movieTitle2").innerHTML
+    }
+
+    setImg2(nombreImg) {
+        document.getElementById("img2").src = nombreImg
+    }
     /**
      * Obtiene el texto ingresado en el input "Usuario", sección "Login".
      * @returns String que contiene el nombre de usuario.

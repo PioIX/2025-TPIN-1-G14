@@ -10,22 +10,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
-<body>
-   <header>
-        <h2>Ranking global:</h2>
-   </header> 
-   <main>
-    <section></section>
-   </main>
+
+<body onload="rellenarRanking()">
     <header>
         <h1>Ranking global:</h1>
     </header>
     <main>
         <section id="section5">
             <div class="scoreContainer">
-                <ul id="rankingList">
-                </ul>
+                <table id="scoreRanking">
+                    <tr>
+                        <th>Nombre</th>
+                        <br>
+                        <th>Puntaje</th>
+                    </tr>
+                </table>
             </div>
+            <div class="botones">
+                <button class="ultimoBoton" onclick="volverInicio()">Volver al inicio</button>
+                <button class="ultimoBoton" onclick="juego()">Volver a juegar</button>
+            </div>
+
         </section>
     </main>
     <script src="dom.js"></script>

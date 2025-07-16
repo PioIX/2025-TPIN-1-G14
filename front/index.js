@@ -39,6 +39,7 @@ async function register() {
     let respuesta = await registerFetch();
     if (respuesta == 1) {
         idLogged = ui.getId()
+        localStorage.setItem("idLogged", idLogged)
         //let user = ui.getUser()
         ui.clearLoginInputs()
         location.href = "./index2.html"
@@ -57,8 +58,6 @@ async function logInFetch() {
         contraseña: ui.getPassword(),
         id_usuario: ui.getId()
     }
-
-
     try {
         let resultado = await fetch('http://localhost:4000/verificarUser', {
             method: "POST",
@@ -80,6 +79,7 @@ async function logIn() {
     let respuesta = await logInFetch();
     if (respuesta == 1) {
         idLogged = ui.getId()
+        localStorage.setItem("idLogged", idLogged)
         //let user = ui.getUser()
         ui.clearLoginInputs()
         if (idLogged == 3) {
@@ -167,7 +167,7 @@ async function fetchAgregarPelicula() {
 
 }
 
-async function agregarPelicula(){
+async function agregarPelicula() {
 
     let response = fetchAgregarPelicula();
 
@@ -183,7 +183,7 @@ async function agregarPelicula(){
 async function fetchEliminarUsuario() {
 
     let id_usuario = Number(ui.getIdUsuario())
-    
+
     let resultado = await fetch('http://localhost:4000/borrarUser', {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -210,3 +210,162 @@ async function eliminarUser() {
         ui.clearInputs()
     }
 }
+
+
+function clickeoImagen(imagen) {
+
+    if (imagen == 1) {
+
+        if (tituloCorrecto == ui.getTitle1()) {
+            console.log(1)
+            comparar2(imagen, estrenoCorrecto)
+            return 1
+
+        } else if (tituloCorrecto != ui.getTitle1) {
+            console.log(2)
+            console.log(score)
+            //ui.setFinalScore(score)
+            perdiste(score)
+            return 2
+        }
+    }
+    else {
+
+        if (tituloCorrecto == ui.getTitle2()) {
+            console.log(1)
+            comparar2(imagen, estrenoCorrecto)
+            return 1
+        } else if (tituloCorrecto != ui.getTitle2) {
+            console.log(2)
+            console.log(score)
+            //ui.setFinalScore(score)
+            perdiste(score)
+            return 2
+        }
+    }
+}
+
+function guardarScore(score) {
+    let finalScore = score
+    return finalScore
+}
+let correcta = ''
+let idCorrecto = -1;
+async function fetchComparar() {
+
+    let resultado = await fetch('http://localhost:4000/compararEstrenos', {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+    let response = await resultado.json()
+
+    ui.setImg1(response[0].nombre_img1)
+    ui.setImg2(response[0].nombre_img2)
+    ui.setTitle1(response[0].pelicula_1)
+    ui.setTitle2(response[0].pelicula_2)
+
+
+    idCorrecto = response[0].id_primero;
+    console.log(response[0], idCorrecto);
+    tituloCorrecto = response[0].estreno_primero
+    estrenoCorrecto = response[0].estreno_correcto
+}
+let rondas = 1
+
+let score = 0
+
+async function comparar2(imagenPresionada) {
+
+    let resultado = await fetch('http://localhost:4000/segundoComparar', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: idCorrecto })
+    })
+    let response = await resultado.json()
+
+    console.log(estrenoCorrecto, tituloCorrecto, estrenoCorrecto)
+
+
+    let id2 = response[0].id_pelicula2
+    let pelicula2 = response[0].pelicula_2
+    let estreno2 = response[0].estreno_2
+
+
+    console.log(estreno2, pelicula2, id2)
+
+
+
+    if (estrenoCorrecto > estreno2) {
+        estrenoCorrecto = estreno2
+        tituloCorrecto = pelicula2
+        idCorrecto = id2
+    }
+    console.log(estrenoCorrecto, tituloCorrecto, estrenoCorrecto)
+
+    if (imagenPresionada == 1) {
+        ui.setImg2(response[0].nombre_img2)
+        ui.setTitle2(pelicula2)
+    } else {
+        ui.setImg1(response[0].nombre_img2)
+        ui.setTitle1(pelicula2)
+    }
+
+    rondas++
+    score = score + 5
+    console.log(score)
+    ui.setRondas(rondas)
+    ui.setScore(score)
+    return (estrenoCorrecto, tituloCorrecto, idCorrecto)
+}
+
+/*function guardarPuntaje(puntaje){
+    finalScore = puntaje
+    return(finalScore)
+}*/
+
+function perdiste(score) {
+
+    rondas = 1
+    let finalScore = guardarScore(score)
+    localStorage.setItem("score", score);
+    location.href = "./index3.html"
+}
+
+function volverInicio() {
+    location.href = "./index.html"
+}
+
+function juego() {
+    location.href = "./index2.html"
+}
+
+function ranking() {
+    location.href = "./index4.html"
+}
+
+async function fetchRanking() {
+    let resultado = await fetch('http://localhost:4000/rankingPuntajes', {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+    });
+    let response = await resultado.json()
+    return (response)
+}
+
+async function rellenarRanking() {
+
+    let content = await fetchRanking()
+    console.log(content)
+    //document.getElementById("scoreRanking").innerText =content
+    let tabla = ``
+
+    for (let i = 0; i < content.data.length; i++) {
+        tabla += `<tr>
+            <td>${content.data[i].usuario}</td>
+            <td>${content.data[i].puntaje_total}</td>
+          </tr>`;
+        }
+    document.getElementById("scoreRanking").innerHTML += tabla;
+
+}
+
